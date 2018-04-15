@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://dreambelieva24:batab00m@ds113648.mlab.com:13648/jcscraper");
+mongoose.connect(process.env.PROD_MONGODB);
 
 // Routes
 
