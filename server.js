@@ -26,10 +26,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
-mongoose.connect("mongodb://jennifernoel:yourmom@ds261678.mlab.com:61678/heroku_fv91srk6");
-
-// Routes
+const databaseUrl   = "mongodb://localhost:27017/scraper";
+const herokuDBUrl   = "mongodb://username:password@ds261678.mlab.com:61678/heroku_fv91srk6";
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.PROD_MONGODB);
+} else {
+  mongoose.connect(databaseUrl);
+}
+mongoose.connection.on('error', function (err) {
+  console.error('connection error: ' + err);
+});
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
