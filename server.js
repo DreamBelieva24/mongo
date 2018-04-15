@@ -27,7 +27,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/week18Populater");
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://dreambelieva24:batab00m@ds113648.mlab.com:13648/jcscraper";
+
+// Set mongoose to leverage built in JavaScript ES6 Promises
+// Connect to the Mongo DB
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
 
 // Routes
 
