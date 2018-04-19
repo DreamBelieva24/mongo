@@ -27,15 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const databaseUrl   = "mongodb://localhost:27017/scraper";
-const herokuDBUrl   = "mongodb://username:password@ds261678.mlab.com:61678/heroku_fv91srk6";
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.PROD_MONGODB);
-} else {
-  mongoose.connect(databaseUrl);
-}
-mongoose.connection.on('error', function (err) {
-  console.error('connection error: ' + err);
-});
+mongoose.connect(process.env.PROD_MONGODB)
+
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
