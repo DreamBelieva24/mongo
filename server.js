@@ -29,7 +29,7 @@ app.use(express.static("public"));
 const databaseUrl   = "mongodb://localhost:27017/scraper";
 
 if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.PROD_MONGODB);
+  mongoose.connect(process.env.MONGODB_URI);
 } else {
   mongoose.connect(databaseUrl);
 }
