@@ -26,8 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-const databaseUrl   = "mongodb://localhost:27017/scraper";
-mongoose.connect(process.env.PROD_MONGODB)
+const MONGODB_URI = 
+  process.env.MONGODB_URI || "mongodb://localhost/nytHeadlines";
+
+mongoose.connect(MONGODB_URI)
 
 
 // A GET route for scraping the echoJS website
